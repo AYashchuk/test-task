@@ -12,17 +12,18 @@ class App extends React.Component {
     interval;
     intervalId;
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.store = props.store;
+        this.countOfTableForUpdateAtTheSameTime = props.countOfTableForUpdateAtTheSameTime;
         this.interval = props.interval;
     }
 
     componentDidMount() {
         const countOfTables = getCountOfTables();
         this.deleteInterval();
-        this.intervalId = setInterval(()=>{
-            const newChange = generateRandomChanges(countOfTables);
+        this.intervalId = setInterval(() => {
+            const newChange = generateRandomChanges(countOfTables, this.countOfTableForUpdateAtTheSameTime);
             this.store.dispatch(newChange);
         }, this.interval);
     }
@@ -39,11 +40,11 @@ class App extends React.Component {
         );
     }
 
-    deleteInterval(){
+    deleteInterval() {
         this.intervalId && clearInterval(this.intervalId);
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.deleteInterval();
     }
 }

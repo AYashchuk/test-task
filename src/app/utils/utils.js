@@ -6,10 +6,12 @@ let utils;
 class Utils {
     _numberOfType = 3;
     _countOfTables = 100;
+    _countOfTableForUpdateAtTheSameTime = 30;
 
-    constructor(numberOfType, countOfTables) {
+    constructor(numberOfType, countOfTables, countOfTableForUpdateAtTheSameTime) {
         this._numberOfType = numberOfType;
         this._countOfTables = countOfTables;
+        this._countOfTableForUpdateAtTheSameTime = countOfTableForUpdateAtTheSameTime;
         this.mapTypeToImage();
     }
 
@@ -23,7 +25,7 @@ class Utils {
     generateData() {
         const tables = new Map();
         for (let i = 0; i < this._countOfTables; i++) {
-            const max = faker.random.number(30) || 1;
+            const max = faker.random.number(40) || 1;
             let table = {
                 id: i,
                 type: this.getType(faker.random.number(this._numberOfType)),

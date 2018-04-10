@@ -4,7 +4,7 @@ import { getTypeToImageMapper } from '../utils/utils';
 
 function TableComponent(props) {
     const mapper = getTypeToImageMapper();
-    const {name, warning, type, maxPlayers, id, unsetWarning} = props;
+    const { name, warning, type, maxPlayers, id, unsetWarning, players } = props;
     return (
         <div className={`table ${warning ? "warning" : ""}`}>
             <div className="header">

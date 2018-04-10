@@ -7,17 +7,17 @@ import {
     UPDATE_MANY_TABLES
 } from '../actions/index';
 
-function changePlayers(state, {id, players}) {
+function changePlayers(state, { id, quantity }) {
     if (state) {
         const newState = new Map(state);
-        const targetObject = newState.get(id);
-        targetObject.players = players > targetObject.maxPlayers ? targetObject.maxPlayers : players;
+        const targetObject = {...newState.get(id)};
+        targetObject.players = quantity;
         newState.set(id, targetObject);
         return newState;
     } else return state;
 }
 
-function unsetWarning(state, {id}) {
+function unsetWarning(state, { id }) {
     if (state) {
         const newState = new Map(state);
         const targetObject = newState.get(id);
@@ -27,7 +27,7 @@ function unsetWarning(state, {id}) {
     } else return state;
 }
 
-function setWarning(state, {id}) {
+function setWarning(state, { id }) {
     if (state) {
         const newState = new Map(state);
         const targetObject = newState.get(id);
@@ -55,24 +55,22 @@ const reducer = (state, action) => {
 
 function updateManyTablesReducer(state, action) {
     const newState = new Map(state);
-    action.changes.forEach(({id, warning, players, type}) => {
-        const table = newState.get(id);
-        if (table) {
-            switch (type) {
-                case CHANGE_PLAYERS:
-                    table.players = players(table.maxPlayers);
-                    break;
-                case SET_WARNING:
-                    table.warning = true;
-                    break;
-                case UNSET_WARNING:
-                    table.warning = false;
-                    break;
-                default:
-                    return state;
-            }
-            newState.set(id, table);
+    action.changes.forEach(({ id, warning, players, type }) => {
+        const table = {...newState.get(id)};
+        switch (type) {
+            case CHANGE_PLAYERS:
+                table.players = players(table.maxPlayers);
+                break;
+            case SET_WARNING:
+                table.warning = true;
+                break;
+            case UNSET_WARNING:
+                table.warning = false;
+                break;
+            default:
+                return newState;
         }
+        newState.set(id, table);
     });
     return newState;
 }

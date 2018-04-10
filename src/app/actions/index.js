@@ -49,16 +49,16 @@ export const availableChanges = [
     UNSET_WARNING
 ];
 
-export function generateRandomChanges(countOfTables) {
-    const tablesForChanging = faker.random.number(50) || 1;
+export function generateRandomChanges(countOfTables, countOfTableForUpdateAtTheSameTime) {
+    const tablesForChanging = faker.random.number(countOfTableForUpdateAtTheSameTime) || 1;
     const changes = [];
     for (let i = 0; i < tablesForChanging; i++) {
         const type = availableChanges[faker.random.number(2)];
-        const id = faker.random.number(countOfTables);
+        const id = faker.random.number(countOfTables - 1);
         const change = {
             type,
             id,
-            players: (maxPlayers) =>  faker.random.number(maxPlayers-1)
+            players: (maxPlayers, currentPlayers) => faker.random.number(maxPlayers - 1)
         };
         changes.push(change);
     }

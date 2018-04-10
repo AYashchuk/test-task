@@ -43,9 +43,9 @@ describe('actions', () => {
 
     it('update many tables', () => {
         const countOfTables = 500;
-        const {type, changes} = generateRandomChanges(countOfTables);
+        const { type, changes } = generateRandomChanges(countOfTables);
         expect(type).toEqual(UPDATE_MANY_TABLES);
-        changes.forEach(({type, id, players}, i) => {
+        changes.forEach(({ type, id, players }, i) => {
             const maxPlayersOnTable = 5 + i;
             const currentPlayers = players(maxPlayersOnTable);
             expect(id).toBeLessThan(countOfTables);

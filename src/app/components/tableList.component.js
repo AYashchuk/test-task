@@ -2,7 +2,7 @@ import TableComponent from './table.component';
 import * as React from 'react';
 
 function TableList(props) {
-    const {tables} = props;
+    const { tables } = props;
     const renderList = () => {
         const list = [];
         for (let key of tables.keys()) {
