@@ -8,27 +8,33 @@ import {
 } from '../actions/index';
 
 function changePlayers(state, {id, players}) {
-    const newState = new Map(state);
-    const targetObject = newState.get(id);
-    targetObject.players = players > targetObject.maxPlayers ? targetObject.maxPlayers : players;
-    newState.set(id, targetObject);
-    return newState;
+    if (state) {
+        const newState = new Map(state);
+        const targetObject = newState.get(id);
+        targetObject.players = players > targetObject.maxPlayers ? targetObject.maxPlayers : players;
+        newState.set(id, targetObject);
+        return newState;
+    } else return state;
 }
 
 function unsetWarning(state, {id}) {
-    const newState = new Map(state);
-    const targetObject = newState.get(id);
-    targetObject.warning = false;
-    newState.set(id, targetObject);
-    return newState;
+    if (state) {
+        const newState = new Map(state);
+        const targetObject = newState.get(id);
+        targetObject.warning = false;
+        newState.set(id, targetObject);
+        return newState;
+    } else return state;
 }
 
 function setWarning(state, {id}) {
-    const newState = new Map(state);
-    const targetObject = newState.get(id);
-    targetObject.warning = true;
-    newState.set(id, targetObject);
-    return newState;
+    if (state) {
+        const newState = new Map(state);
+        const targetObject = newState.get(id);
+        targetObject.warning = true;
+        newState.set(id, targetObject);
+        return newState;
+    } else return state;
 }
 
 const reducer = (state, action) => {

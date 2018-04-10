@@ -4,31 +4,32 @@ import { getTypeToImageMapper } from '../utils/utils';
 
 function TableComponent(props) {
     const mapper = getTypeToImageMapper();
+    const {name, warning, type, maxPlayers, id, unsetWarning} = props;
     return (
-        <div className={`table ${props.warning ? "warning" : ""}`}>
+        <div className={`table ${warning ? "warning" : ""}`}>
             <div className="header">
                 <span className="name-string">
                     Name:
                 </span>
                 <span className="name">
-                    {props.name}
+                    {name || ''}
                 </span>
             </div>
             <div className="image">
-                <img alt="table_img" src={mapper[props.type]} />
+                <img alt="table_img" src={mapper[type]} />
             </div>
             <div>
                 <div className="info">
                     <span>Players:</span>
-                    <span className="bold">{props.players}</span>
+                    <span className="bold">{players}</span>
                 </div>
                 <div className="info">
                     <span>MaxPlayers:</span>
-                    <span className="bold">{props.maxPlayers}</span>
+                    <span className="bold">{maxPlayers}</span>
                 </div>
-                {props.warning ?
+                {warning ?
                     (<div className="info">
-                        <button onClick={() => props.unsetWarning(props.id)}>
+                        <button onClick={() => unsetWarning(id)}>
                             Fix warning
                         </button>
                     </div>)
@@ -45,7 +46,7 @@ TableComponent.propTypes = {
     maxPlayers: PropTypes.number.isRequired,
     warning: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
-    unsetWarning: PropTypes.func.isRequired,
+    unsetWarning: PropTypes.func,
 
 };
 
