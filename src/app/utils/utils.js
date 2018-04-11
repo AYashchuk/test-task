@@ -23,6 +23,7 @@ class Utils {
     }
 
     generateData() {
+        // TODO: change Map on MyCustomDataStructure (fom utils folder)
         const tables = new Map();
         for (let i = 0; i < this._countOfTables; i++) {
             const max = faker.random.number(40) || 1;

@@ -9,8 +9,9 @@ import {
 
 function changePlayers(state, { id, quantity }) {
     if (state) {
+        // TODO: change Map on MyCustomDataStructure (fom utils folder)
         const newState = new Map(state);
-        const targetObject = {...newState.get(id)};
+        const targetObject = { ...newState.get(id) };
         targetObject.players = quantity;
         newState.set(id, targetObject);
         return newState;
@@ -19,6 +20,7 @@ function changePlayers(state, { id, quantity }) {
 
 function unsetWarning(state, { id }) {
     if (state) {
+        // TODO: change Map on MyCustomDataStructure (fom utils folder)
         const newState = new Map(state);
         const targetObject = newState.get(id);
         targetObject.warning = false;
@@ -29,6 +31,7 @@ function unsetWarning(state, { id }) {
 
 function setWarning(state, { id }) {
     if (state) {
+        // TODO: change Map on MyCustomDataStructure (fom utils folder)
         const newState = new Map(state);
         const targetObject = newState.get(id);
         targetObject.warning = true;
@@ -54,9 +57,10 @@ const reducer = (state, action) => {
 
 
 function updateManyTablesReducer(state, action) {
+    // TODO: change Map on MyCustomDataStructure (fom utils folder)
     const newState = new Map(state);
-    action.changes.forEach(({ id, warning, players, type }) => {
-        const table = {...newState.get(id)};
+    action.changes.forEach(({ id, players, type }) => {
+        const table = { ...newState.get(id) };
         switch (type) {
             case CHANGE_PLAYERS:
                 table.players = players(table.maxPlayers);
